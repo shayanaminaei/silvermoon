@@ -80,14 +80,14 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-12 col-12">
                             <div class="about__text">
-                                <h2> اکسسوری<span></span></h2>
+                                <h2> اکسسوری<span> (:</span></h2>
 
                                 <p> هنر دقت به جزئیات</p>
 
                                <p></p>
 
                                 <div class="about__button">
-                                    <a class="default__button btn__pink" href="{% url 'productions:product_list' %}"> خرید کنید</a>
+                                    <a class="default__button btn__pink" href="http://127.0.0.1:8000/%D8%A7%DA%A9%D8%B3%D8%B3%D9%88%D8%B1%DB%8C/"> خرید کنید</a>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
 
 
 
-
+                                
                                 <div class="row grid__responsive row__custom__class feature__slider__active slider__default__arrow">
                                     {% for product in products %}
                                         <div class="col-xl-3 column__custom__class">
@@ -126,15 +126,16 @@
                                                 <div class="grid__wraper__icon">
                                                     <ul>
                                                         <li>
-                                                            <span data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                <a class="quick__view__action" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش سریع" data-bs-original-title="نمایش سریع">
+                                                            <!--برای مستقیم پریدن به بالا-->
+                                                            {% comment %} <span data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                <a class="quick__view__action" href="{{product.get_absolute_url}}" data-bs-toggle="tooltip" data-bs-placement="top" title="نمایش سریع" data-bs-original-title="نمایش سریع">
                                                                     <i class="far fa-eye"></i>
                                                                 </a>
-                                                            </span>
+                                                            </span> {% endcomment %}
                                                         </li>
 
                                                         <li>
-                                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به سبد خرید" data-bs-original-title="افزودن به سبد خرید">
+                                                            <a href="{{product.get_absolute_url}}" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به سبد خرید" data-bs-original-title="افزودن به سبد خرید">
                                                                 <i class="fas fa-shopping-cart"></i>
                                                             </a>
                                                         </li>

@@ -408,7 +408,13 @@
                               <li>
                                 <strong>دسته بندی:</strong>
                                 <span>
-                                  <a href="#">{{ product.category }}</a>
+                                  <a>{{ product.category }}</a>
+                                </span>
+                              </li>
+                              <li>
+                                <strong> برند:</strong>
+                                <span>
+                                  <a href="#">{{ product.brand }}</a>
                                 </span>
                               </li>
                             </ul>
@@ -417,6 +423,13 @@
 
                           <hr>
                     {% if product.available == True %}
+
+
+
+                    {% comment %} add to cart {% endcomment %}
+
+
+                    
 {#                            <form id="add-cart" method="POST">#}
 {#                                {% csrf_token %}#}
 {##}
@@ -500,12 +513,12 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="single__product__contact__text text-center">
-                                <h2>برای کمک بیشتر، با تیم پشتیبانی ما تماس بگیرید.</h2>
+                                <h2>در صورت نیاز با پشتیبانی تماس بگیرید</h2>
                                 <div class="single__product__contact__button">
                                 <a href="{% url 'productions:contact' %}" class="default__button"> تماس با ما</a>
                             </div>
-                            <h3 class="single__product__contact__number"><i class="fas fa-phone"></i> 09035774781</h3>
-                            </div>
+                           <!-- <h3 class="single__product__contact__number"><i class="fas fa-phone"></i> 09102052440</h3>
+                            </div>-->
                         </div>
                     </div>
                 </div>
