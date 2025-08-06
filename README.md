@@ -1,18 +1,20 @@
-🛒 SilverMoon
-SilverMoon is a full-featured e-commerce website built with Django. It provides essential features for managing products, shopping carts, orders, and user accounts with a clean and scalable structure.
+**🛒 SilverMoon**
+-------------------
+
+a full-featured e-commerce website built with Django. It provides essential features for managing products, shopping carts, orders, and user accounts with a clean and scalable structure.
 
 🚀 Features
-Product & category management
+        Product & category management
 
-User registration & authentication
+        User registration & authentication
 
-Shopping cart with quantity management
+        Shopping cart with quantity management
 
-Order placement and history tracking
+        Order placement and history tracking
 
-Admin dashboard for full control
+        Admin dashboard for full control
 
-Customizable templates
+        Customizable templates
 
 (Optional) Email notifications / payment integration / donation features
 🧑‍💻 Getting Started
@@ -23,29 +25,29 @@ Customizable templates
 ```
 **2. Create and activate a virtual environment**
 ```
-  python3 -m venv venv
-  source venv/bin/activate
+    python3 -m venv venv
+    source venv/bin/activate
 
 ```
 **3. Install dependencies**
 ```
-  pip install -r requirements.txt
+    pip install -r requirements.txt
 ```
 **4. Configure environment variables**
 ```
-  SECRET_KEY=your-secret-key
-  DEBUG=True
-  DATABASE_URL=your-database-url
+    SECRET_KEY=your-secret-key
+    DEBUG=True
+    DATABASE_URL=your-database-url
 ```
 **5. Apply migrations & create superuser**
 ```
-  python manage.py makemigrations
-  python manage.py migrate
-  python manage.py createsuperuser
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py createsuperuser
 ```
 **6. Run the development server**
 ```
-  python manage.py runserver
+    python manage.py runserver
 ```
 **7. Visit http://127.0.0.1:8000/ in your browser.**
 
