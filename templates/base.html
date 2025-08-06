@@ -20,6 +20,72 @@
     <link rel="stylesheet" href="{% static 'css/futura-std-4' %}">
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Custom Search Bar Styling */
+        .header-search-bar form {
+            transition: all 0.3s ease;
+        }
+        
+        .header-search-bar form:hover {
+            background: #e9ecef !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-search-bar input:focus {
+            outline: none;
+        }
+        
+        .header-search-bar button:hover svg {
+            color: #000;
+        }
+        
+        /* Header Icons Alignment Fix */
+        .headerarea__right__nav {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .headerarea__right__nav li {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+        
+        .header-search-bar {
+            display: flex;
+            align-items: center;
+        }
+        
+        .setting__wrap, .headermiddle__bar {
+            display: flex;
+            align-items: center;
+            height: 40px;
+        }
+        
+        /* Mobile responsive search bar */
+        @media (max-width: 768px) {
+            .header-search-bar {
+                margin-right: 5px !important;
+            }
+            
+            .header-search-bar form {
+                min-width: 150px !important;
+                padding: 3px 10px !important;
+            }
+            
+            .header-search-bar input {
+                padding: 5px 8px !important;
+                font-size: 12px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-search-bar form {
+                min-width: 120px !important;
+            }
+        }
+    </style>
 </head>
 
 
@@ -60,9 +126,9 @@
 
                                             </a>
                                         </li>
-
-                                        <li><a href="{% url 'productions:about' %}">درباره ما</a> </li>
-                                    </ul>
+                                    
+                                    <li>
+                                        <a href="{% url 'productions:about' %}">درباره ما</a> </li>
                                 </nav>
                             </div>
 
@@ -75,11 +141,16 @@
 
                                 <ul class="headerarea__right__nav">
                                     <li>
-                                        <div class="headerarea__search cursor__pointer">
-                                            <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="icon icon-search" viewbox="0 0 22 22">
-                                                <circle cx="11" cy="10" r="7" fill="none" stroke="currentColor"></circle>
-                                                <path d="m16 15 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
+                                        <div class="header-search-bar" style="margin-right: 15px;">
+                                            <form action="{% url 'productions:search_results' %}" method="get" style="display: flex; align-items: center; background: #f8f9fa; border-radius: 25px; padding: 5px 15px; min-width: 200px;">
+                                                <input type="search" name="q" value="" placeholder="جستجو..." style="border: none; background: none; outline: none; flex: 1; padding: 8px 10px; font-size: 14px; direction: rtl;">
+                                                <button type="submit" style="border: none; background: none; cursor: pointer; padding: 5px;">
+                                                    <svg role="presentation" stroke-width="2" focusable="false" width="18" height="18" class="icon icon-search" viewbox="0 0 22 22">
+                                                        <circle cx="11" cy="10" r="7" fill="none" stroke="currentColor"></circle>
+                                                        <path d="m16 15 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
                                         </div>
                                     </li>
                                     <li>
@@ -284,25 +355,6 @@
             </div>
             <!-- setting__wrap__list__end -->
 
-            <!-- header__search -->
-            <div class="headersearch__active">
-                <div class="headersearch__active__icon">
-                    <button class="headersearch__active__close">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                            <title>بستن</title>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"></path>
-                        </svg></button>
-                </div>
-                <div class="headersearch__active__input">
-                    <form action="{% url 'productions:search_results' %}" method="get" role="search" style="position: relative;">
-                        <div class="header__form__search">
-                            <input type="search" name="q" value="" placeholder=" جستجو کنید" class="input-text" autocomplete="off">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- header__search -->
 
         </header>
         <!-- header section end -->
@@ -357,7 +409,7 @@
                         <li><a href="{% url 'productions:landing_page' %}">خانه</a></li>
                         <li><a href="{% url 'productions:category_list' %}">دسته بندی</a></li>
                         <li><a href="{% url 'productions:about' %}">درباره ما</a></li>
-                        <li><a href="#">لیست آرزوها</a></li>
+                        <li><a href="http://127.0.0.1:8000/donate/"> کمک مالی مستقیم </a></li>
                     </ul>
                   </div>
                 </div>

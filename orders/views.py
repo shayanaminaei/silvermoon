@@ -131,7 +131,7 @@ class CartDetail(APIView):
 
 
 def show_cart(request):
-    return render(request, 'cart.html', {})
+    return render(request, 'cart_modern.html', {})
 
 
 # SHOW CHECKOUT HTML

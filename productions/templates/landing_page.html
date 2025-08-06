@@ -18,14 +18,14 @@
 
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-12 herobanner__img__side">
                                             <div class="herobanner__img">
-                                                <a href="http://127.0.0.1:8000/لباس-مردونه/"><img style="height: 550px; width: auto; padding-left: 40px;" src="{% static 'img/men-cl/Arms-Cross.png' %}" alt=""></a>
+                                                <a href="http://127.0.0.1:8000/لباس-مردونه/"><img style="height: 550px; width: auto; padding-left: 40px;" src="{% static 'img/men-cl/men-icon.png' %}" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-12 herobanner__text__side">
                                             <div class="herobanner__text__wraper ltn__slide-animation" style="text-align: right;" >
                                                 <h1 class="herobanner__title herobanner__title__color animated" >  پیرهن مردونه </h1>
                                                 <div class="herobanner__text herobanner__text__color  animated">
-                                                    <p>سبک‌های جذاب برای روح‌های رویایی</p>
+                                                    <p>سبک‌های جذاب برای اشخاص جاذب</p>
                                                 </div>
                                                 <div class="herobanner__button herobanner__button__color  animated">
                                                     <a href="http://127.0.0.1:8000/لباس-مردونه/" class="default__button" tabindex="0">خرید کنید</a>
@@ -40,17 +40,17 @@
 
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-12 herobanner__img__side">
                                             <div class="herobanner__img">
-                                                <a href="http://127.0.0.1:8000/%D9%84%D8%A8%D8%A7%D8%B3-%DA%A9%D9%88%D8%AF%DA%A9/"><img style="height: 550px; width: auto; padding-left: 40px" src="{% static 'img/baby/Baby-Hat.png' %}" alt=""></a>
+                                                <a href="http://127.0.0.1:8000/%D9%84%D8%A8%D8%A7%D8%B3-%DA%A9%D9%88%D8%AF%DA%A9/"><img style="height: 550px; width: auto; padding-left: 40px" src="{% static 'img/baby/Baby-icon.png' %}" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6 col-12 herobanner__text__side">
                                             <div class="herobanner__text__wraper ltn__slide-animation" style="text-align: right;">
-                                                <h1 class="herobanner__title herobanner__title__color animated">  لباس کودک</h1>
+                                                <h1 class="herobanner__title herobanner__title__color animated">  لباس کوچولوها</h1>
                                                 <div class="herobanner__text herobanner__text__color  animated">
-                                                    <p>zسبک‌های جذاب برای نسل </p>
+                                                    <p>  سبک های کوچولو برای بچه های کوچولو </p>
                                                 </div>
                                                 <div class="herobanner__button herobanner__button__color  animated">
-                                                    <a href="http://127.0.0.1:8000/%D9%84%D8%A8%D8%A7%D8%B3-%DA%A9%D9%88%D8%AF%DA%A9/" class="default__button" tabindex="0">خرید کنید</a>
+                                                    <a href="http://127.0.0.1:8000/%D9%84%D8%A8%D8%A7%D8%B3-%DA%A9%D9%88%DA%86%D9%88%D9%84%D9%88%D9%87%D8%A7/" class="default__button" tabindex="0">خرید کنید</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +82,7 @@
                             <div class="about__text">
                                 <h2> اکسسوری<span> (:</span></h2>
 
-                                <p> هنر دقت به جزئیات</p>
+                                <p>هنر دقت به جزئیات - وقتی حرف ها عمل میکنن</p>
 
                                <p></p>
 
@@ -180,6 +180,7 @@
 
         </ul>
     </div>
+    
                                             </div>
 
                                         </div>
@@ -196,8 +197,171 @@
                                 </div>
 
             </div>
-<!-- feature__section__start -->
+<!-- feature__section__end -->
 
+<!-- پرفروش ترین اکسسوری ها section start -->
+<div class="feture__section sp_bottom_80">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="section__title text-center">
+                    <h2>پرفروش ترین اکسسوری ها</h2>
+                </div>
+            </div>
+        </div>
+        
+        {% if accessory_products %}
+        <div class="row grid__responsive row__custom__class feature__slider__active slider__default__arrow">
+            {% for product in accessory_products %}
+                <div class="col-xl-3 column__custom__class">
+                <div class="grid__wraper">
+                    <div class="grid__wraper__img">
+                        <div class="grid__wraper__img__inner">
+                            <a href="{{product.get_absolute_url}}">
+                                <img class="primary__image" src="{{product.main_image.url}}" alt="Primary Image">
+                                <img class="secondary__image" src="{{product.main_image.url}}" alt="Secondary Image">
+                            </a>
+                        </div>
+                        <div class="grid__wraper__icon">
+                            <ul>
+                                <li>
+                                    <a href="{{product.get_absolute_url}}" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به سبد خرید" data-bs-original-title="افزودن به سبد خرید">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid__wraper__badge">
+                            <span class="new__badge">پرفروش</span>
+                        </div>
+                    </div>
+                    <div class="grid__wraper__info">
+                        <h3 class="grid__wraper__tittle">
+                            <a href="{{product.get_absolute_url}}" tabindex="0"> {{product.name}}</a>
+                        </h3>
+                        <div class="grid__wraper__price">
+                            <span>{{product.price}} تومان</span>
+                        </div>
+                        <div class="grid__wraper__color">
+                            <ul class="color-categories grid-color-swatch color__img__parent d-flex justify-content-center">
+                                {% for color in product.colors.all|slice:":4" %}
+                                    <li class="color_img_variant">
+                                        <label data-bs-toggle="tooltip" data-bs-placement="top" title="{{ color.name }}" style="background: {{ color.name|translate_color }};">
+                                        </label>
+                                    </li>
+                                {% endfor %}
+                                {% if product.colors.all.count > 4 %}
+                                    <li class="vaiant-plus-one">
+                                        <a href="{{product.get_absolute_url}}" tabindex="0">
+                                            <span>+{{ product.colors.all.count|add:"-4" }}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-xl-12 text-center">
+                <p style="color: #666; font-size: 16px; margin: 40px 0;">هنوز محصولی در دسته اکسسوری موجود نیست.</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="col-xl-12">
+            <div class="feture__section__button text-center">
+                <a class="default__button" href="{% url 'productions:product_list_by_category' 'اکسسوری' %}">مشاهده همه اکسسوری ها</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- پرفروش ترین اکسسوری ها section end -->
+
+<!-- پربازدید ترین محصولات section start -->
+<div class="feture__section sp_bottom_80">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="section__title text-center">
+                    <h2>پربازدید ترین محصولات</h2>
+                </div>
+            </div>
+        </div>
+        
+        {% if popular_products %}
+        <div class="row grid__responsive row__custom__class feature__slider__active slider__default__arrow">
+            {% for product in popular_products %}
+                <div class="col-xl-3 column__custom__class">
+                <div class="grid__wraper">
+                    <div class="grid__wraper__img">
+                        <div class="grid__wraper__img__inner">
+                            <a href="{{product.get_absolute_url}}">
+                                <img class="primary__image" src="{{product.main_image.url}}" alt="Primary Image">
+                                <img class="secondary__image" src="{{product.main_image.url}}" alt="Secondary Image">
+                            </a>
+                        </div>
+                        <div class="grid__wraper__icon">
+                            <ul>
+                                <li>
+                                    <a href="{{product.get_absolute_url}}" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به سبد خرید" data-bs-original-title="افزودن به سبد خرید">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="grid__wraper__badge">
+                            <span class="new__badge">محبوب</span>
+                        </div>
+                    </div>
+                    <div class="grid__wraper__info">
+                        <h3 class="grid__wraper__tittle">
+                            <a href="{{product.get_absolute_url}}" tabindex="0"> {{product.name}}</a>
+                        </h3>
+                        <div class="grid__wraper__price">
+                            <span>{{product.price}} تومان</span>
+                        </div>
+                        <div class="grid__wraper__color">
+                            <ul class="color-categories grid-color-swatch color__img__parent d-flex justify-content-center">
+                                {% for color in product.colors.all|slice:":4" %}
+                                    <li class="color_img_variant">
+                                        <label data-bs-toggle="tooltip" data-bs-placement="top" title="{{ color.name }}" style="background: {{ color.name|translate_color }};">
+                                        </label>
+                                    </li>
+                                {% endfor %}
+                                {% if product.colors.all.count > 4 %}
+                                    <li class="vaiant-plus-one">
+                                        <a href="{{product.get_absolute_url}}" tabindex="0">
+                                            <span>+{{ product.colors.all.count|add:"-4" }}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-xl-12 text-center">
+                <p style="color: #666; font-size: 16px; margin: 40px 0;">محصولی موجود نیست.</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="col-xl-12">
+            <div class="feture__section__button text-center">
+                <a class="default__button" href="{% url 'productions:product_list' %}">مشاهده همه محصولات</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- پربازدید ترین محصولات section end -->
 
         <!-- animate__content__start -->
                         <div class="animate__content sp_bottom_100">
@@ -221,6 +385,11 @@
     <br>
     <br>
 
+
+
+
+ 
+
     <!-- fetaure__section__start -->
  <div class="feature__2 sp_bottom_80">
     <div class="container">
@@ -232,7 +401,7 @@
                     </div>
                     <div class="feature__2__text">
                         <h4>ارسال با تیپاکس</h4>
-                        <p>در اولین فرصت</p>
+                        <p> ⚡ </p>
                     </div>
                 </div>
             </div>
@@ -243,7 +412,7 @@
                     </div>
                     <div class="feature__2__text">
                         <h4>ضمانت تعویض کالا</h4>
-                        <p>برای 7 روز</p>
+                        <p> در 168 ساعت اول</p>
                     </div>
                 </div>
             </div>
@@ -254,7 +423,7 @@
                     </div>
                     <div class="feature__2__text">
                         <h4>تسویه حساب ایمن</h4>
-                        <p>100٪ پرداخت امن.</p>
+                        <p>با پرداخت امن</p>
                     </div>
                 </div>
             </div>
@@ -273,4 +442,8 @@
     </div>
  </div>
  <!-- fetaure__section__end -->
-{% endblock content %}
+
+
+
+
+ {% endblock content %}

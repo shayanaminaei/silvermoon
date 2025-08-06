@@ -1,314 +1,82 @@
-﻿{% load static %}
+﻿{% extends 'base.html' %}
+{% load static %}
 {% load color_filters %}
-<!doctype html>
-<html class="no-js" lang="zxx" dir="rtl">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>سیلور🌖-سبکی که اهمیت دارد</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
-    <!-- Place favicon.ico in the root directory -->
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/futura-std-4' %}">
-    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
-
-<body>
-
-
-    <main class="main_wrapper body__overlay overflow__hidden">
-
-        <!-- header section start -->
-        <header>
-            <div class="headerarea header__sticky">
-                <div class="container desktop__menu__wrapper">
-                    <div class="row common__row position-relative">
-                        <div class="col-xl-2 col-lg-2 col-md-6">
-                            <div class="headerarea__logo">
-                                <a href="#"><img style="height: 150px; width: auto" src="{% static 'img/logo/logo__1.png' %}" alt=""></a>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xl-7 col-lg-7 col-md-6 main_menu_wrap">
-
-                            <div class="headerarea__main__menu ">
-                                <nav>
-                                    <ul>
-                                        <li><a href="{% url 'productions:landing_page' %}">خانه</a> </li>
-
-                                        <li><a class="headerarea__has__dropdown" href="{% url 'productions:category_list' %}">دسته بندی
-                                            </a>
-                                            <span class="header__label hot__color">داغ</span>
-
-                                            <ul class="headerarea__submenu">
-                                                {% for category in categories_context %}
-                                                    <li><a href="{% url 'productions:product_list_by_category' category.slug %}">{{ category.category_name }}</a></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </li>
-
-                                        <li><a href="{% url 'productions:contact' %}">تماس با ما
-
-                                            </a>
-                                        </li>
-
-                                        <li><a href="{% url 'productions:about' %}">درباره ما</a> </li>
-                                    </ul>
-                                </nav>
-                            </div>
-
-                        </div>
-
-
-                        <div class="col-xl-3 col-lg-3 col-md-6">
-
-                            <div class="headerarea__right">
-
-                                <ul class="headerarea__right__nav">
-                                    <li>
-                                        <div class="headerarea__search cursor__pointer">
-                                            <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="icon icon-search" viewbox="0 0 22 22">
-                                                <circle cx="11" cy="10" r="7" fill="none" stroke="currentColor"></circle>
-                                                <path d="m16 15 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="setting__wrap cursor__pointer">
-                                            <div class="setting__wrap__active">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                                                    <path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path>
-                                                    <path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="headermiddle__bar cursor__pointer">
-                                            <div class="headermiddle__account">
-                                                <div class="headermiddle__account__img">
-                                                    <a href="{% url 'orders:cart' %}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                                                            <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle>
-                                                            <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle>
-                                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M48 80h64l48 272h256"></path>
-                                                            <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path>
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="container-fluid mob_menu_wrapper headerarea header__sticky">
-                <div class="row align-items-center">
-                    <div class="col-sm-4 col-2">
-                        <div class="mobile-off-canvas">
-                            <a class="mobile-aside-button" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
-                                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-5">
-                        <div style=" padding-left: 50px; margin-left: 10px" class="mobile-logo">
-                            <a class="logo__mobile" href="#"><img src="{% static 'img/logo/logo__1.png' %}" alt="logo"></a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-5">
-                        <div class="header-right-wrap">
-
-
-                            <div class="header__right__inner__wrap d-flex align-items-center justify-content-end">
-
-                                <ul class="headerarea__right headerarea__right__mobail__menu">
-                                    <li>
-                                        <div class="headerarea__search cursor__pointer">
-
-                                            <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="icon icon-search" viewbox="0 0 22 22">
-                                                <circle cx="11" cy="10" r="7" fill="none" stroke="currentColor"></circle>
-                                                <path d="m16 15 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-
-
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="setting__wrap cursor__pointer">
-                                            <div class="setting__wrap__active">
-
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                                                    <path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path>
-                                                    <path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                                                </svg>
-
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="headermiddle__bar cursor__pointer">
-                                            <div class="headermiddle__account">
-                                                <div class="headermiddle__account__img">
-                                                    <a href="{% url 'orders:cart' %}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                                                            <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle>
-                                                            <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle>
-                                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M48 80h64l48 272h256"></path>
-                                                            <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path>
-                                                        </svg>
-                                                    </a>
-{#                                                    <span class=" bigcounter">2</span>#}
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Mobile Menu Start Here -->
-            <div class="mobile-off-canvas-active">
-                <a class="mobile-aside-close"><i class="fa fa-close"></i></a>
-                <div class="header-mobile-aside-wrap">
-
-                    <div class="mobile__logo">
-                        <a href="index.html">
-                            <img style="width: 100px; height: auto" src="{% static 'img/logo/logo__1.png' %}" alt="Logo">
-                        </a>
-                    </div>
-
-                    <div class="mobile-search">
-                        <form action="{% url 'productions:search_results' %}" method="get" class="search-form">
-                            <input type="search" name="q" value="" placeholder="جستجوی کل فروشگاه…">
-                            <button class="button-search"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                    <div class="mobile-menu-wrap">
-
-                        <div class="mobile-navigation">
-
-                            <nav>
-                                <ul class="mobile-menu">
-                                    <li><a href="{% url 'productions:landing_page' %}">خانه</a>
-                                    <li class="menu-item-has-children"><a href="{% url 'productions:category_list' %}">دسته بندی</a>
-                                        <ul class="dropdown">
-                                            {% for category in categories_context %}
-                                                <li><a href="{% url 'productions:product_list_by_category' category.slug %}">{{ category.category_name }}</a></li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="{% url 'productions:about' %}">درباره</a>
-                                    </li>
-                                    <li><a href="{% url 'productions:contact' %}">تماس با ما</a>
-                                    </li>
-
-
-                                </ul>
-                            </nav>
-
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile Menu end Here -->
-
-            <!-- setting__wrap__list__start -->
-            <div class="setting__wrap__list">
-                <button class="setting__wrap__close">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                        <title>بستن</title>
-                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"></path>
-                    </svg></button>
-
-                <div class="setting__wrap__heading">
-                    <h6>
-                        <a href="#">حساب کاربری</a>
-                    </h6>
-                </div>
-                <div class="setting__wrap__list__inner">
-                    <ul>
-                        {% if request.COOKIES.access_token %}
-                            <li>
-                                <a href="#" id="logout-link" class="default__button">خروج</a>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a class="default__button" href="{% url 'customers:login_register_page' %}">ورود</a>
-                            </li>
-                        {% endif %}
-                        <li>
-                            <a class="default__button" href="{% url 'orders:cart' %}">سبد خرید</a>
-                        </li>
-{#                        <li>#}
-{#                            <a href="wishlist.html">لیست علاقه‌مندی‌ها</a>#}
-{#                        </li>#}
-                    </ul>
-                </div>
-            </div>
-            <!-- setting__wrap__list__end -->
-
-            <!-- header__search -->
-            <div class="headersearch__active">
-                <div class="headersearch__active__icon">
-                    <button class="headersearch__active__close">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                            <title>بستن</title>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"></path>
-                        </svg></button>
-                </div>
-                <div class="headersearch__active__input">
-                    <form action="{% url 'productions:search_results' %}" method="get" role="search" style="position: relative;">
-                        <div class="header__form__search">
-                            <input type="search" name="q" value="" placeholder=" جستجو کنید" class="input-text" autocomplete="off">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- header__search -->
-
-        </header>
-        <!-- header section end -->
+{% block content %}
+<style>
+    /* Image hover effect */
+    .grid__wraper__img__inner {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .grid__wraper__img__inner .primary__image {
+        transition: opacity 0.3s ease;
+        display: block;
+        width: 100%;
+    }
+    
+    .grid__wraper__img__inner .secondary__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .grid__wraper__img:hover .secondary__image {
+        opacity: 1;
+    }
+    
+    .grid__wraper__img:hover .primary__image {
+        opacity: 0;
+    }
+    
+    /* Custom styles for better product grid centering */
+    .shop .container {
+        max-width: 1200px;
+    }
+    
+    .grid__responsive {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .pagination__wraper {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    
+    .pagination__wraper ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Center category title */
+    .category h2 {
+        text-align: center;
+    }
+    
+    /* Better spacing for product items */
+    .grid__wraper {
+        margin-bottom: 30px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .grid__responsive {
+            justify-content: space-around;
+        }
+    }
+</style>
 
         <!-- breadcrumb__start -->
         <div class="breadcrumb">
@@ -332,11 +100,13 @@
         </div>
          <!-- breadcrumb__end -->
 
+
+
     <!-- shop__section__start-->
         <div class="shop sp_top_80">
             <div class="container">
-                <div class="row grid__responsive">
-                    <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12">
                         <div class="shop__right__wraper">
                             <div class="shop__tab">
                                 <ul class="nav " id="myTab" role="tablist">
@@ -365,7 +135,9 @@
                                                         <div class="grid__wraper__img__inner">
                                                             <a href="{{ product.get_absolute_url }}">
                                                                 <img class="primary__image" src="{{ product.main_image.url }}" alt="Primary Image">
-                                                                <img class="secondary__image" src="{{ product.secondary_image.url }}" alt="Secondary Image">
+                                                                {% if product.secondary_image %}
+                                                                    <img class="secondary__image" src="{{ product.secondary_image.url }}" alt="Secondary Image">
+                                                                {% endif %}
                                                             </a>
                                                         </div>
                                                         <div class="grid__wraper__icon">
@@ -437,7 +209,9 @@
                                                     <div class="grid__wraper__img__inner">
                                                         <a href="{{ product.get_absolute_url }}">
                                                             <img class="primary__image" src="{{ product.main_image.url }}" alt="Primary Image">
-                                                            <img class="secondary__image" src="{{ product.secondary_image.url }}" alt="Secondary Image">
+                                                            {% if product.secondary_image %}
+                                                                <img class="secondary__image" src="{{ product.secondary_image.url }}" alt="Secondary Image">
+                                                            {% endif %}
                                                         </a>
                                                     </div>
 
@@ -564,6 +338,11 @@
         <!-- شروع بخش دسته‌بندی -->
         <div class="category sp_bottom_70 sp_top_80">
             <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-4">
+                        <h2 style="color: #333; font-size: 32px; font-weight: bold; margin-bottom: 30px;">دسته بندی ها</h2>
+                    </div>
+                </div>
                 <div class="row grid__responsive row__custom__class category__slider__active slider__default__arrow">
                     {% for category in categories_context %}
                         <div class="col-12 column__custom__class">
@@ -623,7 +402,7 @@
                         <li><a href="{% url 'productions:landing_page' %}">خانه</a></li>
                         <li><a href="{% url 'productions:category_list' %}">دسته بندی</a></li>
                         <li><a href="{% url 'productions:about' %}">درباره ما</a></li>
-                        <li><a href="#">لیست آرزوها</a></li>
+                        <li><a href="http://127.0.0.1:8000/donate/"> کمک مالی مستقیم</a></li>
                     </ul>
                   </div>
                 </div>
@@ -703,3 +482,4 @@
 </body>
 
 </html>
+{% endblock %}

@@ -1,0 +1,28 @@
+
+<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; direction: rtl;">
+  <div style="background: #f0f0f0; padding: 20px; border-radius: 8px; max-width: 400px; width: 100%; text-align: right;">
+    <h2>کمک به نیازمندان</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" style="padding: 8px 16px; background-color: #4caf50; color: white; border: none; border-radius: 4px;">
+        ارسال کمک
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+  input, textarea {
+  direction: ltr;       /* متن راست چین */
+  text-align: right;    /* متن راست چین */
+  width: 95%;           /* عرض */
+  padding: 8px;
+  box-sizing: border-box;
+  display: block;
+  margin-left: 0;    /* باعث میشه باکس سمت چپ قرار بگیره */
+  margin-right: auto;
+}
+
+</style>
+

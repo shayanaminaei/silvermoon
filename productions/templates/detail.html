@@ -1,313 +1,9 @@
-﻿{% load static %}
-<!doctype html>
-<html class="no-js" lang="zxx" dir="rtl">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>سیلور🌖-سبکی که اهمیت دارد</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block title %}{{ product.name }} - سیلور🌖{% endblock %}
 
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
-    <!-- Place favicon.ico in the root directory -->
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/futura-std-4' %}">
-    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-    
-    
-    <body>
-    
-    
-        <main class="main_wrapper body__overlay">
-    
-        <!-- header section start -->
-        <header>
-            <div class="headerarea header__sticky">
-                <div class="container desktop__menu__wrapper">
-                    <div class="row common__row position-relative">
-                        <div class="col-xl-2 col-lg-2 col-md-6">
-                            <div class="headerarea__logo">
-                                <a href="#"><img style="height: 150px; width: auto" src="{% static 'img/logo/logo__1.png' %}" alt=""></a>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xl-7 col-lg-7 col-md-6 main_menu_wrap">
-
-                            <div class="headerarea__main__menu ">
-                                <nav>
-                                    <ul>
-                                        <li><a href="{% url 'productions:landing_page' %}">خانه</a> </li>
-
-                                        <li><a class="headerarea__has__dropdown" href="{% url 'productions:category_list' %}">دسته بندی
-                                            </a>
-                                            <span class="header__label hot__color">داغ</span>
-
-                                            <ul class="headerarea__submenu">
-                                                {% for category in categories_context %}
-                                                    <li><a href="{% url 'productions:product_list_by_category' category.slug %}">{{ category.category_name }}</a></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </li>
-
-                                        <li><a href="{% url 'productions:contact' %}">تماس با ما
-
-                                            </a>
-                                        </li>
-
-                                        <li><a href="{% url 'productions:about' %}">درباره ما</a> </li>
-                                    </ul>
-                                </nav>
-                            </div>
-
-                        </div>
-
-
-                        <div class="col-xl-3 col-lg-3 col-md-6">
-
-                            <div class="headerarea__right">
-
-                                <ul class="headerarea__right__nav">
-                                    <li>
-                                        <div class="headerarea__search cursor__pointer">
-                                            <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="icon icon-search" viewbox="0 0 22 22">
-                                                <circle cx="11" cy="10" r="7" fill="none" stroke="currentColor"></circle>
-                                                <path d="m16 15 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="setting__wrap cursor__pointer">
-                                            <div class="setting__wrap__active">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                                                    <path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path>
-                                                    <path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="headermiddle__bar cursor__pointer">
-                                            <div class="headermiddle__account">
-                                                <div class="headermiddle__account__img">
-                                                    <a href="{% url 'orders:cart' %}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                                                            <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle>
-                                                            <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle>
-                                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M48 80h64l48 272h256"></path>
-                                                            <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path>
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="container-fluid mob_menu_wrapper headerarea header__sticky">
-                <div class="row align-items-center">
-                    <div class="col-sm-4 col-2">
-                        <div class="mobile-off-canvas">
-                            <a class="mobile-aside-button" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
-                                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-5">
-                        <div style=" padding-left: 50px; margin-left: 10px" class="mobile-logo">
-                            <a class="logo__mobile" href="#"><img src="{% static 'img/logo/logo__1.png' %}" alt="logo"></a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-5">
-                        <div class="header-right-wrap">
-
-
-                            <div class="header__right__inner__wrap d-flex align-items-center justify-content-end">
-
-                                <ul class="headerarea__right headerarea__right__mobail__menu">
-                                    <li>
-                                        <div class="headerarea__search cursor__pointer">
-
-                                            <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="icon icon-search" viewbox="0 0 22 22">
-                                                <circle cx="11" cy="10" r="7" fill="none" stroke="currentColor"></circle>
-                                                <path d="m16 15 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-
-
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="setting__wrap cursor__pointer">
-                                            <div class="setting__wrap__active">
-
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                                                    <path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path>
-                                                    <path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path>
-                                                </svg>
-
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="headermiddle__bar cursor__pointer">
-                                            <div class="headermiddle__account">
-                                                <div class="headermiddle__account__img">
-                                                    <a href="{% url 'orders:cart' %}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                                                            <circle cx="176" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle>
-                                                            <circle cx="400" cy="416" r="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle>
-                                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M48 80h64l48 272h256"></path>
-                                                            <path d="M160 288h249.44a8 8 0 007.85-6.43l28.8-144a8 8 0 00-7.85-9.57H128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path>
-                                                        </svg>
-                                                    </a>
-{#                                                    <span class=" bigcounter">2</span>#}
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Mobile Menu Start Here -->
-            <div class="mobile-off-canvas-active">
-                <a class="mobile-aside-close"><i class="fa fa-close"></i></a>
-                <div class="header-mobile-aside-wrap">
-
-                    <div class="mobile__logo">
-                        <a href="index.html">
-                            <img style="width: 100px; height: auto" src="{% static 'img/logo/logo__1.png' %}" alt="Logo">
-                        </a>
-                    </div>
-
-                    <div class="mobile-search">
-                        <form action="{% url 'productions:search_results' %}" method="get" class="search-form">
-                            <input type="search" name="q" value="" placeholder="جستجوی کل فروشگاه…">
-                            <button class="button-search"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                    <div class="mobile-menu-wrap">
-
-                        <div class="mobile-navigation">
-
-                            <nav>
-                                <ul class="mobile-menu">
-                                    <li><a href="{% url 'productions:landing_page' %}">خانه</a>
-                                    <li class="menu-item-has-children"><a href="{% url 'productions:category_list' %}">دسته بندی</a>
-                                        <ul class="dropdown">
-                                            {% for category in categories_context %}
-                                                <li><a href="{% url 'productions:product_list_by_category' category.slug %}">{{ category.category_name }}</a></li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="{% url 'productions:about' %}">درباره</a>
-                                    </li>
-                                    <li><a href="{% url 'productions:contact' %}">تماس با ما</a>
-                                    </li>
-
-
-                                </ul>
-                            </nav>
-
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile Menu end Here -->
-
-            <!-- setting__wrap__list__start -->
-            <div class="setting__wrap__list">
-                <button class="setting__wrap__close">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                        <title>بستن</title>
-                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"></path>
-                    </svg></button>
-
-                <div class="setting__wrap__heading">
-                    <h6>
-                        <a href="#">حساب کاربری</a>
-                    </h6>
-                </div>
-                <div class="setting__wrap__list__inner">
-                    <ul>
-                        {% if request.COOKIES.access_token %}
-                            <li>
-                                <a href="#" id="logout-link" class="default__button">خروج</a>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a class="default__button" href="{% url 'customers:login_register_page' %}">ورود</a>
-                            </li>
-                        {% endif %}
-                        <li>
-                            <a class="default__button" href="{% url 'orders:cart' %}">سبد خرید</a>
-                        </li>
-{#                        <li>#}
-{#                            <a href="wishlist.html">لیست علاقه‌مندی‌ها</a>#}
-{#                        </li>#}
-                    </ul>
-                </div>
-            </div>
-            <!-- setting__wrap__list__end -->
-
-            <!-- header__search -->
-            <div class="headersearch__active">
-                <div class="headersearch__active__icon">
-                    <button class="headersearch__active__close">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewbox="0 0 512 512">
-                            <title>بستن</title>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"></path>
-                        </svg></button>
-                </div>
-                <div class="headersearch__active__input">
-                    <form action="{% url 'productions:search_results' %}" method="get" role="search" style="position: relative;">
-                        <div class="header__form__search">
-                            <input type="search" name="q" value="" placeholder=" جستجو کنید" class="input-text" autocomplete="off">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- header__search -->
-
-        </header>
-        <!-- header section end -->
+{% block content %}
 
 
             <!-- breadcrumb__start -->
@@ -319,10 +15,13 @@
                                 <h1>محصول</h1>
                                 <ul>
                                     <li>
-                                        <a href="#">خانه</a>
+                                        <a href="{% url 'productions:landing_page' %}">خانه</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'productions:product_list_by_category' product.category.slug %}">{{ product.category.category_name }}</a>
                                     </li>
                                     <li class="color__blue">
-                                        جزئیات محصول
+                                        {{ product.name }}
                                     </li>
                                 </ul>
                             </div>
@@ -458,14 +157,56 @@
 {##}
 {##}
 {##}
-{#                            <hr>#}
+{#                            <hr>#}                                
                         {% endif %}
 
 
+                            {# Add to Cart Section #}
+                            <div class="single__product__actions" style="margin: 20px 0;">
+                                <form id="add-to-cart-form" method="POST">
+                                    {% csrf_token %}
+                                    
+                                    <!-- Color Selection -->
+                                    <div class="color-selection" style="margin-bottom: 15px; display: flex; align-items: center;">
+                                        <label style="margin-right: 10px; font-weight: bold; padding-left: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;انتخاب رنگ:</label>
+                                        <div class="color-options" style="display: flex; gap: 10px;">
+                                            {% for color in product.colors.all %}
+                                                <label class="color-option" style="cursor: pointer;" title="{{ color.name }}">
+                                                    <input type="radio" name="color" value="{{ color.id }}" style="display: none;" {% if forloop.first %}checked{% endif %}>
+                                                    <span style="display: inline-block; width: 30px; height: 30px; border-radius: 50%; background-color: {% if color.name == 'قرمز' or color.name == 'red' %}#ff0000{% elif color.name == 'آبی' or color.name == 'blue' %}#0000ff{% elif color.name == 'سبز' or color.name == 'green' %}#00ff00{% elif color.name == 'زرد' or color.name == 'yellow' %}#ffff00{% elif color.name == 'سفید' or color.name == 'white' %}#ffffff{% elif color.name == 'سیاه' or color.name == 'black' %}#000000{% elif color.name == 'صورتی' or color.name == 'pink' %}#ffc0cb{% elif color.name == 'بنفش' or color.name == 'purple' %}#800080{% elif color.name == 'نارنجی' or color.name == 'orange' %}#ffa500{% elif color.name == 'قهوه‌ای' or color.name == 'brown' %}#a52a2a{% elif color.name == 'طوسی' or color.name == 'gray' %}#808080{% else %}#cccccc{% endif %}; border: 2px solid #ddd; position: relative; transition: all 0.3s ease;" title="{{ color.name }}">
+                                                        <span class="checkmark" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold;">✓</span>
+                                                    </span>
+                                                </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Quantity Selection -->
+                                    <div class="quantity-selection" style="margin-bottom: 20px; display: flex; align-items: center;">
+                                        <label style="font-weight: 600; margin-right: 10px; padding-left: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;تعداد:</label>
+                                        <div class="quantity-controls" style="display: flex; align-items: center; gap: 10px;">
+                                            <input type="number" name="quantity" value="1" min="1" max="50" class="qty-input" style="width: 60px; text-align: center; border: 2px solid #ddd; border-radius: 8px; padding: 5px; font-size: 14px; font-weight: 600;">
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                                <!-- Action Buttons Section -->
+                                <div class="product-actions" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px; margin-top: 25px;">
+                                    <!-- Gift Cart Button -->
+                                    <button type="button" class="gift-cart-btn action-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 15px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 12px; transition: all 0.3s ease; text-align: center; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); white-space: nowrap;">🎁 سبد هدیه</button>
+                                    
+                                    <!-- Add to Cart Button -->
+                                    <a href="http://127.0.0.1:8000/cart/" type="submit" form="add-to-cart-form" class="add-to-cart-btn action-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 15px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 12px; transition: all 0.3s ease; text-align: center; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); white-space: nowrap;">🛒 افزودن به سبد خرید</a>
+                                    
+                                    <!-- Add to Shop List Button -->
+                                    {#<button type="button" class="add-to-shop-list-btn action-btn" data-product-id="{{ product.id }}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 12px 15px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 12px; transition: all 0.3s ease; text-align: center; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); white-space: nowrap;">📝 لیست خرید</button>#}
+                                    
+                                    <!-- Direct Donation Button -->
+                                    <a href="http://127.0.0.1:8000/donate/" class="donate-btn action-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; padding: 12px 15px; border-radius: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.3s ease; text-align: center; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); white-space: nowrap;">💝 کمک مالی مستقیم</a>
+                                </div>
+                            </div>
 
-                            <p class="single__product__car">
-                                        <img src="{% static 'img/car/car.webp' %}" height="25" alt="تاریخ تحویل">
-{#                                        تاریخ تحویل تخمینی : <strong>09-  12 آگوست، 2024.</strong>#}
+                            
                             </p>
 {#                            <div class="single__return__menu">#}
 {#                                <h6>خلاصه قوانین بازگشت</h6>#}
@@ -527,186 +268,149 @@
 
 
 
-<!-- footer__section__start -->
-  <div class="footer ">
-    <div class="footer__inner sp_top_80">
-    <div class="container sp_bottom_60">
-        <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                <div class="footer__widget">
-                    <h4 class="footer__title">درباره ما</h4>
-                    <div class="footer__content">
-                        <p>Silver Moon یک پلتفرم خرده فروشی آنلاین پویا و نوآورانه است که طیف گسترده ای از محصولات را به مشتریان در سراسر کشور ارائه می دهد.</p>
-                    </div>
+{% endblock content %}
 
-                    <div class="footer__bottom">
-<h5>سبکی که اهمیت دارد🌖</h5>
-                </div>
-                </div>
-            </div>
-
-            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-4 col-6">
-                <div class="footer__widget">
-                    <h4 class="footer__title">اطلاعات تماس</h4>
-                    <div class="footer__menu">
-                    <ul>
-                        <li><a href="#">تلفن:09102052440</a></li>
-                        <li><a href="#">ایمیل: shayanaminaei@gmail.com</a></li>
-                        <li><a href="#">شعبه حضوری: تهران-خیابان مولوی،بازارچه سعادت،پاساژ پرشین٫طبقه همکف٫پلاک۳۲۰</a></li>
-                    </ul>
-                  </div>
-                </div>
-            </div>
-            &emsp;
-            &emsp;
-            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-4 col-6">
-                <div class="footer__widget">
-                    <h4 class="footer__title">لینک سریع</h4>
-                    <div class="footer__menu">
-                    <ul>
-                        <li><a href="{% url 'productions:landing_page' %}">خانه</a></li>
-                        <li><a href="{% url 'productions:category_list' %}">دسته بندی</a></li>
-                        <li><a href="{% url 'productions:about' %}">درباره ما</a></li>
-                        <li><a href="#">لیست آرزوها</a></li>
-                    </ul>
-                  </div>
-                </div>
-            </div>
-            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-4 col-6">
-                <div class="footer__widget">
-                    <h4 class="footer__title">اعتماد شما سرمایه ماست</h4>
-                    <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=582919&Code=xIwy1riSwGeTRkGJd8BhoFKqpINVrvzz'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=582919&Code=xIwy1riSwGeTRkGJd8BhoFKqpINVrvzz' alt='' style='cursor:pointer' code='xIwy1riSwGeTRkGJd8BhoFKqpINVrvzz'></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{#      <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=582919&Code=xIwy1riSwGeTRkGJd8BhoFKqpINVrvzz'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=582919&Code=xIwy1riSwGeTRkGJd8BhoFKqpINVrvzz' alt='' style='cursor:pointer' code='xIwy1riSwGeTRkGJd8BhoFKqpINVrvzz'></a>#}
-
-    <div class="copyright">
-    <div class="container">
-        <div class="row">
-          <div class="col-12 text-center">
-            <div class="copyright__text">
-
-                <p>© <strong>Silver Moon 🌖</strong>. تمامی حقوق محفوظ است.</p>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
- <!-- footer__section__end -->
-        </main>
-
-
-            <!-- JS here -->
-                <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
-                <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-
-                <script src="{% static 'js/popper.min.js' %}"></script>
-                <script src="{% static 'js/bootstrap.min.js' %}"></script>
-                <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
-                <script src="{% static 'js/one-page-nav-min.js' %}"></script>
-                <script src="{% static 'js/slick.min.js' %}"></script>
-                <script src="{% static 'js/jquery.meanmenu.min.js' %}"></script>
-                <script src="{% static 'js/ajax-form.js' %}"></script>
-                <script src="{% static 'js/wow.min.js' %}"></script>
-                <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
-                <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
-                <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-                <script src="{% static 'js/waypoints.min.js' %}"></script>
-                <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
-                <script src="{% static 'js/fontawesome.min.js' %}"></script>
-                <script src="{% static 'js/plugins.js' %}"></script>
-                <script src="{% static 'js/main.js' %}"></script>
-                <script>
-                $(document).ready(function () {
-                    $("#logout-link").click(function (event) {
-                        event.preventDefault(); // جلوگیری از تغییر صفحه
-
-                        $.ajax({
-                            type: "POST",
-                            url: "{% url 'customers:logout' %}",  // مسیر ویو Logout
-                            headers: { "X-CSRFToken": "{{ csrf_token }}" }, // ارسال CSRF برای امنیت
-                            success: function (response) {
-                                alert('خروج موفقیت آمیز');  // نمایش پیام موفقیت
-                                window.location.href = response.redirect_url;  // ریدایرکت به صفحه اصلی
-                            },
-                            error: function (xhr, status, error) {
-                                console.error("خطا در خروج:", error);
-                            }
-                        });
-                    });
-                });
-            </script>
+{% block extra_js %}
 <script>
-    $(document).ready(function () {
-    // تابع تبدیل اعداد فارسی و عربی به انگلیسی
-    function convertToEnglishDigits(input) {
-        return input.replace(/[۰-۹]/g, function (d) {
-            return String.fromCharCode(d.charCodeAt(0) - 1728);
-        }).replace(/[٠-٩]/g, function (d) {
-            return String.fromCharCode(d.charCodeAt(0) - 1584);
-        });
-    }
-
-    // تابع بررسی مقدار و اعمال محدودیت
-    function validateQuantity(input) {
-        var value = convertToEnglishDigits(input.val());
-
-        // اگر مقدار ورودی خالی باشد، تغییری اعمال نشود
-        if (value === "") {
-            return;
-        }
-
-        var quantity = parseInt(value);
-
-        if (isNaN(quantity) || quantity < 1) {
-            quantity = 1;
-        } else if (quantity > 50) {
-            quantity = 50;
-        }
-
-        input.val(quantity);
-    }
-
-    // بررسی مقدار هنگام تایپ در ورودی
-    $("#product-quantity").on("input", function () {
-        validateQuantity($(this));
+$(document).ready(function () {
+    // Color selection functionality
+    $('.color-option input[type="radio"]').change(function() {
+        $('.color-option .checkmark').hide();
+        $(this).siblings('.checkmark').show();
+        $(this).parent().siblings().find('span').css('border', '2px solid #ddd');
+        $(this).siblings('span').css('border', '2px solid #007bff');
     });
 
-    // ارسال فرم هنگام کلیک روی "افزودن به سبد خرید"
-    $("#submit-link").off("click").on("click", function (event) {
-        event.preventDefault();
-        var input = $("#product-quantity");
-        validateQuantity(input);  // اطمینان از مقدار صحیح قبل از ارسال
+    // Initialize first color as selected
+    $('.color-option:first input[type="radio"]').trigger('change');
 
-        var formData = $("#add-cart").serialize(); // دریافت داده‌های فرم
-        console.log("فرم ارسال شد:", formData);
+    // Quantity control buttons
+    $('.qty-plus').click(function() {
+        const input = $('.qty-input');
+        const currentValue = parseInt(input.val()) || 1;
+        if (currentValue < 50) {
+            input.val(currentValue + 1);
+        }
+    });
+
+    $('.qty-minus').click(function() {
+        const input = $('.qty-input');
+        const currentValue = parseInt(input.val()) || 1;
+        if (currentValue > 1) {
+            input.val(currentValue - 1);
+        }
+    });
+
+    // Validate quantity input
+    $('.qty-input').on('input', function() {
+        let value = parseInt($(this).val()) || 1;
+        if (value < 1) value = 1;
+        if (value > 50) value = 50;
+        $(this).val(value);
+    });
+
+    // Add to cart form submission
+    $('#add-to-cart-form').submit(function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            'quantity': $('.qty-input').val(),
+            'color': $('input[name="color"]:checked').val(),
+            'csrfmiddlewaretoken': $('[name=csrfmiddlewaretoken]').val()
+        };
+
+        // Show loading state
+        const submitBtn = $('.add-to-cart-btn');
+        const originalText = submitBtn.html();
+        submitBtn.html('🔄 در حال افزودن...').prop('disabled', true);
 
         $.ajax({
-            type: "POST",
-            url: "{% url 'orders:cart_add' product.id %}",
+            type: 'POST',
+            url: '{% url "orders:cart_add" product.id %}',
             data: formData,
-            success: function (response) {
-                console.log("اضافه شد به سبد خرید:", response);
-                window.location.href = "{% url 'orders:cart' %}";
+            success: function(response) {
+                submitBtn.html('✅ افزوده شد!').css('background', '#28a745');
+                setTimeout(function() {
+                    submitBtn.html(originalText).css('background', 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)').prop('disabled', false);
+                }, 2000);
+                
+                // Show success message and redirect to cart
+                alert('محصول با موفقیت به سبد خرید اضافه شد!');
+                // Redirect to cart page
+                window.location.href = 'http://127.0.0.1:8000/cart/';
             },
-            error: function (xhr, status, error) {
-                console.error("خطا در افزودن به سبد خرید:", error);
+            error: function(xhr, status, error) {
+                submitBtn.html(originalText).prop('disabled', false);
+                console.error('خطا در افزودن به سبد خرید:', error);
+                alert('خطا در افزودن محصول به سبد خرید!');
             }
         });
     });
+
+    // Add to Shop List functionality
+    $('.add-to-shop-list-btn').click(function(e) {
+        e.preventDefault();
+        
+        const productId = $(this).data('product-id');
+        const button = $(this);
+        const originalText = button.html();
+        
+        // Show loading state
+        button.html('🔄 در حال افزودن...').prop('disabled', true);
+        
+        $.ajax({
+            type: 'POST',
+            url: '{% url "productions:add_to_shop_list" 0 %}'.replace('0', productId),
+            headers: {
+                'X-CSRFToken': $('[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response) {
+                if (response.success) {
+                    button.html('✅ افزوده شد!').css('background', '#28a745');
+                    setTimeout(function() {
+                        button.html(originalText).css('background', 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)').prop('disabled', false);
+                    }, 2000);
+                    alert('محصول به لیست خرید اضافه شد!');
+                } else {
+                    button.html('⚠️ موجود است').css('background', '#ffc107');
+                    setTimeout(function() {
+                        button.html(originalText).css('background', 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)').prop('disabled', false);
+                    }, 2000);
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                button.html(originalText).prop('disabled', false);
+                console.error('خطا در افزودن به لیست خرید:', error);
+                alert('خطا در افزودن محصول به لیست خرید!');
+            }
+        });
+    });
+
+    // Hover effects for buttons
+    $('.add-to-cart-btn, .add-to-shop-list-btn').hover(
+        function() {
+            $(this).css('transform', 'translateY(-2px)');
+        },
+        function() {
+            $(this).css('transform', 'translateY(0)');
+        }
+    );
+
+    $('.view-cart-btn').hover(
+        function() {
+            $(this).css({
+                'background': '#5a6268',
+                'transform': 'translateY(-2px)'
+            });
+        },
+        function() {
+            $(this).css({
+                'background': '#6c757d',
+                'transform': 'translateY(0)'
+            });
+        }
+    );
 });
-
-
 </script>
-
-
-
-    </body>
-
-</html>
+{% endblock %}

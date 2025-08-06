@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 from core.models import BaseModel
 
 # Create your models here.
@@ -78,3 +79,32 @@ class Image(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Donation(models.Model):
+    donor_name = models.CharField(verbose_name=_('نام اهداکننده'), max_length=255)
+    amount = models.PositiveIntegerField(verbose_name=_('مبلغ (تومان)'))
+    message = models.TextField(verbose_name=_('پیام (اختیاری)'), blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('کمک مالی')
+        verbose_name_plural = _('کمک‌ها')
+
+    def __str__(self):
+        return f"{self.donor_name} - {self.amount:,} تومان"
+
+
+class ShopList(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('کاربر'))
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('محصول'))
+    added_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('لیست خرید')
+        verbose_name_plural = _('لیست‌های خرید')
+        unique_together = ('user', 'product')  # Prevent duplicate entries
+
+    def __str__(self):
+        return f"{self.user.username} - {self.product.name}"
+

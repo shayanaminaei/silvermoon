@@ -218,20 +218,20 @@
         
         
 
-        /*====== Search active ======*/
-        function sidebarSearch() {
-            var searchTrigger = $('.headerarea__search'),
-                endTriggersearch = $('.headersearch__active__close'),
-                container = $('.headersearch__active ');
-            searchTrigger.on('click', function(e) {
-                e.preventDefault();
-                container.addClass('inside');
-            });
-            endTriggersearch.on('click', function() {
-                container.removeClass('inside');
-            });
-        };
-        sidebarSearch();
+        /*====== Search active ====== - DISABLED FOR INLINE SEARCH BAR */
+        // function sidebarSearch() {
+        //     var searchTrigger = $('.headerarea__search'),
+        //         endTriggersearch = $('.headersearch__active__close'),
+        //         container = $('.headersearch__active ');
+        //     searchTrigger.on('click', function(e) {
+        //         e.preventDefault();
+        //         container.addClass('inside');
+        //     });
+        //     endTriggersearch.on('click', function() {
+        //         container.removeClass('inside');
+        //     });
+        // };
+        // sidebarSearch();
 
 
 

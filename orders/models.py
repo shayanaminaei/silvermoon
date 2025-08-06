@@ -83,6 +83,7 @@ class OrderItem(models.Model):
     price = models.PositiveIntegerField(_("قیمت"))
     quantity = models.PositiveIntegerField(_("تعداد"), default=0)
     color = models.ForeignKey(Color, on_delete=models.CASCADE, verbose_name=_('رنگ'))  # اصلاح فیلد رنگ به ForeignKey
+    
 
     def __str__(self):
         return str(self.id)

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- breadcrumb__start -->
+        <div class="breadcrumb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="breadcrumb__title">
+                            <h1>دسته بندی</h1>
+                            <ul>
+                                <li>
+                                    <a href="#">خانه</a>
+                                </li>
+                                <li class="color__blue">
+                                    دسته بندی
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- breadcrumb__end -->
+
+        <!-- categories section start -->
+        <div class="category sp_top_80 sp_bottom_80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="section__title text-center">
+                            <h2>دسته بندی محصولات</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for category in categories %}
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                            <div class="category__single">
+                                <div class="category__img">
+                                    <a href="{% url 'productions:product_list_by_category' category.slug %}">
+                                        <img src="{{ category.image.url }}" alt="{{ category.category_name }}">
+                                    </a>
+                                </div>
+                                <div class="category__content">
+                                    <h3>
+                                        <a href="{% url 'productions:product_list_by_category' category.slug %}">{{ category.category_name }}</a>
+                                    </h3>
+                                    <p>{{ category.description|default:"" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- categories section end -->
+
+{% endblock content %}

@@ -1,0 +1,702 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}سبد خرید - سیلور🌖{% endblock %}
+
+{% block content %}
+<style>
+    /* Modern Cart Styles */
+    .modern-cart {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin: 40px 0;
+    }
+
+    .cart-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f8f9fa;
+    }
+
+    .cart-header h2 {
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #e9ecef;
+        vertical-align: middle;
+    }
+
+    .cart-table th {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #495057;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+
+    .product-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .product-name {
+        font-weight: 600;
+        color: #2c3e50;
+        max-width: 200px;
+        word-wrap: break-word;
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .qty-btn {
+        background: #007bff;
+        color: white;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .qty-btn:hover {
+        background: #0056b3;
+        transform: scale(1.1);
+    }
+
+    .qty-input {
+        width: 60px;
+        text-align: center;
+        border: 2px solid #e9ecef;
+        border-radius: 6px;
+        padding: 8px;
+        font-weight: 600;
+    }
+
+    .remove-btn {
+        background: #dc3545;
+        color: white;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .remove-btn:hover {
+        background: #c82333;
+        transform: scale(1.1);
+    }
+
+    .cart-summary {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 25px;
+        margin-top: 30px;
+    }
+
+    .cart-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    .cart-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .btn-modern {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+    }
+
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(17, 153, 142, 0.4);
+    }
+
+    .empty-cart {
+        text-align: center;
+        padding: 60px 20px;
+        color: #6c757d;
+    }
+
+    .empty-cart i {
+        font-size: 80px;
+        margin-bottom: 20px;
+        color: #dee2e6;
+    }
+
+    .empty-cart h3 {
+        margin-bottom: 15px;
+        color: #495057;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .modern-cart {
+            padding: 20px 15px;
+            margin: 20px 0;
+        }
+
+        .cart-table {
+            font-size: 14px;
+        }
+
+        .cart-table th,
+        .cart-table td {
+            padding: 10px 5px;
+        }
+
+        .product-image {
+            width: 60px;
+            height: 60px;
+        }
+
+        .cart-actions {
+            justify-content: center;
+        }
+
+        .btn-modern {
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+    }
+
+    /* Loading Animation */
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #007bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Payment Modal Styles */
+    .payment-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .payment-modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 30px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+    }
+
+    .payment-close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
+
+    .payment-close:hover {
+        color: #000;
+    }
+
+    .payment-options {
+        display: grid;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .payment-option {
+        padding: 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .payment-option:hover {
+        border-color: #007bff;
+        background-color: #f8f9ff;
+    }
+
+    .payment-option.selected {
+        border-color: #007bff;
+        background-color: #e3f2fd;
+    }
+</style>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="breadcrumb__title">
+                    <h1>سبد خرید</h1>
+                    <ul>
+                        <li><a href="{% url 'productions:landing_page' %}">خانه</a></li>
+                        <li class="color__blue">سبد خرید</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modern Cart Section -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="modern-cart">
+                <div class="cart-header">
+                    <h2>🛒 سبد خرید شما</h2>
+                    <p>محصولات انتخابی خود را بررسی کنید</p>
+                </div>
+
+                <!-- Cart Table -->
+                <div class="table-responsive">
+                    <table class="cart-table" id="cart-table">
+                        <thead>
+                            <tr>
+                                <th>تصویر</th>
+                                <th>نام محصول</th>
+                                <th>رنگ</th>
+                                <th>قیمت واحد</th>
+                                <th>تعداد</th>
+                                <th>جمع کل</th>
+                                <th>حذف</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-table-body">
+                            <!-- Cart items will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty Cart Message -->
+                <div id="empty-cart" class="empty-cart" style="display: none;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>سبد خرید شما خالی است</h3>
+                    <p>برای اضافه کردن محصول به سبد خرید، به فروشگاه بروید</p>
+                    <a href="{% url 'productions:product_list' %}" class="btn-modern btn-primary">رفتن به فروشگاه</a>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary" id="cart-summary" style="display: none;">
+                    <div class="cart-total">
+                        <span>جمع کل:</span>
+                        <span id="final-total">0 تومان</span>
+                    </div>
+                    <div class="cart-actions">
+                        <a href="{% url 'productions:product_list' %}" class="btn-modern btn-secondary">ادامه خرید</a>
+                        <button id="clear-cart-btn" class="btn-modern btn-secondary">حذف همه</button>
+                        <button id="update-cart-btn" class="btn-modern btn-secondary">بروزرسانی</button>
+                        <button id="checkout-btn" class="btn-modern btn-success">پرداخت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div id="payment-modal" class="payment-modal">
+    <div class="payment-modal-content">
+        <span class="payment-close">&times;</span>
+        <h3>انتخاب روش پرداخت</h3>
+        <div class="payment-options">
+            <div class="payment-option" data-method="online">
+                <h4>💳 پرداخت آنلاین</h4>
+                <p>پرداخت امن با کارت بانکی</p>
+            </div>
+            <div class="payment-option" data-method="cash">
+                <h4>🚚 پرداخت در محل</h4>
+                <p>پرداخت هنگام تحویل</p>
+            </div>
+            <div class="payment-option" data-method="wallet">
+                <h4>💰 کیف پول</h4>
+                <p>پرداخت از موجودی کیف پول</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="confirm-payment" class="btn-modern btn-success" disabled>تایید پرداخت</button>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function () {
+    let cartData = [];
+    
+    // Format number with commas
+    function formatNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\\d))/g, ",");
+    }
+
+    // Convert Persian digits to English
+    function convertToEnglishDigits(input) {
+        return input.replace(/[۰-۹]/g, function (d) {
+            return String.fromCharCode(d.charCodeAt(0) - 1728);
+        }).replace(/[٠-٩]/g, function (d) {
+            return String.fromCharCode(d.charCodeAt(0) - 1584);
+        });
+    }
+
+    // Load cart items
+    function loadCart() {
+        $.ajax({
+            url: '{% url "orders:cart_api" %}',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                cartData = data.cartitem_set;
+                renderCart();
+            },
+            error: function() {
+                showEmptyCart();
+            }
+        });
+    }
+
+    // Render cart items
+    function renderCart() {
+        const tableBody = $('#cart-table-body');
+        tableBody.empty();
+
+        if (cartData.length === 0) {
+            showEmptyCart();
+            return;
+        }
+
+        let totalSum = 0;
+        
+        cartData.forEach(function(item) {
+            const itemTotal = item.price * item.quantity;
+            totalSum += itemTotal;
+
+            const row = `
+                <tr data-product-id="${item.product_id.id}" data-color-id="${item.color.id}">
+                    <td>
+                        <img src="${item.product_id.main_image}" alt="${item.product_id.name}" class="product-image">
+                    </td>
+                    <td>
+                        <div class="product-name">${item.product_id.name}</div>
+                    </td>
+                    <td>
+                        <span class="badge" style="background-color: ${item.color.name}; color: white;">${item.color.name}</span>
+                    </td>
+                    <td>
+                        <strong>${formatNumber(item.price)} تومان</strong>
+                    </td>
+                    <td>
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus" type="button">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" value="${item.quantity}" min="1" max="50">
+                            <button class="qty-btn qty-plus" type="button">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <strong class="item-total">${formatNumber(itemTotal)} تومان</strong>
+                    </td>
+                    <td>
+                        <button class="remove-btn" title="حذف محصول">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+            tableBody.append(row);
+        });
+
+        $('#final-total').text(formatNumber(totalSum) + ' تومان');
+        $('#cart-summary').show();
+        $('#empty-cart').hide();
+    }
+
+    // Show empty cart message
+    function showEmptyCart() {
+        $('#cart-summary').hide();
+        $('#empty-cart').show();
+    }
+
+    // Quantity control handlers
+    $(document).on('click', '.qty-plus', function() {
+        const input = $(this).siblings('.qty-input');
+        const currentValue = parseInt(input.val()) || 1;
+        if (currentValue < 50) {
+            input.val(currentValue + 1);
+            updateItemTotal($(this).closest('tr'));
+        }
+    });
+
+    $(document).on('click', '.qty-minus', function() {
+        const input = $(this).siblings('.qty-input');
+        const currentValue = parseInt(input.val()) || 1;
+        if (currentValue > 1) {
+            input.val(currentValue - 1);
+            updateItemTotal($(this).closest('tr'));
+        }
+    });
+
+    $(document).on('change', '.qty-input', function() {
+        let value = parseInt(convertToEnglishDigits($(this).val())) || 1;
+        if (value < 1) value = 1;
+        if (value > 50) value = 50;
+        $(this).val(value);
+        updateItemTotal($(this).closest('tr'));
+    });
+
+    // Update item total
+    function updateItemTotal(row) {
+        const productId = row.data('product-id');
+        const colorId = row.data('color-id');
+        const quantity = parseInt(row.find('.qty-input').val());
+        
+        // Find the item in cartData
+        const item = cartData.find(item => 
+            item.product_id.id == productId && item.color.id == colorId
+        );
+        
+        if (item) {
+            const itemTotal = item.price * quantity;
+            row.find('.item-total').text(formatNumber(itemTotal) + ' تومان');
+            
+            // Update total
+            let totalSum = 0;
+            $('#cart-table-body tr').each(function() {
+                const itemRow = $(this);
+                const itemProductId = itemRow.data('product-id');
+                const itemColorId = itemRow.data('color-id');
+                const itemQuantity = parseInt(itemRow.find('.qty-input').val());
+                const itemData = cartData.find(item => 
+                    item.product_id.id == itemProductId && item.color.id == itemColorId
+                );
+                if (itemData) {
+                    totalSum += itemData.price * itemQuantity;
+                }
+            });
+            $('#final-total').text(formatNumber(totalSum) + ' تومان');
+        }
+    }
+
+    // Remove item
+    $(document).on('click', '.remove-btn', function() {
+        const row = $(this).closest('tr');
+        const productId = row.data('product-id');
+        const colorId = row.data('color-id');
+
+        if (confirm('آیا مطمئن هستید که می‌خواهید این محصول را حذف کنید؟')) {
+            $.ajax({
+                url: `/cart/remove/${productId}/`,
+                type: 'POST',
+                data: { color: colorId },
+                headers: { "X-CSRFToken": "{{ csrf_token }}" },
+                success: function() {
+                    row.remove();
+                    cartData = cartData.filter(item => 
+                        !(item.product_id.id == productId && item.color.id == colorId)
+                    );
+                    if (cartData.length === 0) {
+                        showEmptyCart();
+                    } else {
+                        // Update total
+                        let totalSum = 0;
+                        cartData.forEach(item => {
+                            const quantity = $(`tr[data-product-id="${item.product_id.id}"][data-color-id="${item.color.id}"] .qty-input`).val() || item.quantity;
+                            totalSum += item.price * quantity;
+                        });
+                        $('#final-total').text(formatNumber(totalSum) + ' تومان');
+                    }
+                },
+                error: function() {
+                    alert('خطا در حذف محصول');
+                }
+            });
+        }
+    });
+
+    // Update cart
+    $('#update-cart-btn').click(function() {
+        const cartUpdateData = [];
+        
+        $('#cart-table-body tr').each(function() {
+            const row = $(this);
+            cartUpdateData.push({
+                product_id: row.data('product-id'),
+                color_id: row.data('color-id'),
+                quantity: parseInt(row.find('.qty-input').val())
+            });
+        });
+
+        $.ajax({
+            url: "{% url 'orders:cart_update' %}",
+            type: "POST",
+            data: JSON.stringify({ cart: cartUpdateData }),
+            contentType: "application/json",
+            headers: { "X-CSRFToken": "{{ csrf_token }}" },
+            success: function(response) {
+                alert('سبد خرید با موفقیت بروزرسانی شد');
+                loadCart(); // Reload cart
+            },
+            error: function() {
+                alert('خطا در بروزرسانی سبد خرید');
+            }
+        });
+    });
+
+    // Clear cart
+    $('#clear-cart-btn').click(function() {
+        if (confirm('آیا مطمئن هستید که می‌خواهید کل سبد خرید را حذف کنید؟')) {
+            $.ajax({
+                url: "{% url 'orders:cart_clear' %}",
+                type: "POST",
+                headers: { "X-CSRFToken": "{{ csrf_token }}" },
+                success: function() {
+                    cartData = [];
+                    showEmptyCart();
+                    alert('سبد خرید با موفقیت حذف شد');
+                },
+                error: function() {
+                    alert('خطا در حذف سبد خرید');
+                }
+            });
+        }
+    });
+
+    // Payment modal
+    $('#checkout-btn').click(function() {
+        $('#payment-modal').show();
+    });
+
+    $('.payment-close').click(function() {
+        $('#payment-modal').hide();
+    });
+
+    $('.payment-option').click(function() {
+        $('.payment-option').removeClass('selected');
+        $(this).addClass('selected');
+        $('#confirm-payment').prop('disabled', false);
+    });
+
+    $('#confirm-payment').click(function() {
+        const selectedMethod = $('.payment-option.selected').data('method');
+        
+        // Simulate payment process
+        $(this).html('<span class="loading"></span> در حال پردازش...');
+        $(this).prop('disabled', true);
+
+        setTimeout(function() {
+            alert('پرداخت با موفقیت انجام شد! (حالت نمایشی)');
+            $('#payment-modal').hide();
+            $('#confirm-payment').html('تایید پرداخت');
+            $('#confirm-payment').prop('disabled', false);
+            
+            // Optionally clear cart after successful payment
+            cartData = [];
+            showEmptyCart();
+        }, 2000);
+    });
+
+    // Close modal when clicking outside
+    $(window).click(function(event) {
+        if (event.target.id === 'payment-modal') {
+            $('#payment-modal').hide();
+        }
+    });
+
+    // Load cart on page load
+    loadCart();
+});
+</script>
+
+{% endblock %}

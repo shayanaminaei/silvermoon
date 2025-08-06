@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load color_filters %}
+
+{% block content %}
+    <div class="shop__section" style="margin-top:100px">
+        <div class="container sp_top_50">
+            <div class="row">
+                
+                <!-- Search Results Header -->
+                <div class="col-xl-12">
+                    <div class="search-header" style="margin-bottom: 30px;">
+                        {% if query %}
+                            <h2 style="color: #333; font-size: 28px; text-align: center;">نتایج جستجو برای "{{ query }}"</h2>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- No Results Message -->
+                {% if no_results %}
+                    <div class="col-xl-12">
+                        <div class="no-results-message" style="text-align: center; padding: 60px 20px; background: #f8f9fa; border-radius: 10px; margin: 40px 0;">
+                            <div style="font-size: 48px; color: #6c757d; margin-bottom: 20px;">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 style="color: #495057; margin-bottom: 15px;">" هیچ چیزی براتون پیدا نکردیم ~_~ "</h3>
+                            <p style="color: #6c757d; font-size: 16px;">متاسفانه محصول یا دسته‌بندی مورد نظر شما یافت نشد. لطفاً با کلمه کلیدی دیگری جستجو کنید.</p>
+                            <style>
+                                .default__button {
+                                    display: inline-block;
+                                    padding: 12px 30px;
+                                    background: #000;
+                                    color: white;
+                                    text-decoration: none;
+                                    border-radius: 5px;
+                                    transition: all 0.3s ease; /* انیمیشن نرم تغییر رنگ */
+                                }
+                                
+                                .default__button:hover {
+                                    background: white;
+                                    color: black;
+                                }
+                                </style>
+                                
+                                <div style="margin-top: 20px;">
+                                    <a href="{% url 'productions:landing_page' %}" class="default__button">
+                                        بازگشت به خانه
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                {% else %}
+                    
+                    <!-- Categories Results -->
+                    {% if categories_results %}
+                        <div class="col-xl-12">
+                            <div class="search-section" style="margin-bottom: 50px;">
+                                <h3 style="color: #333; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 2px solid #000;">
+                                    <i class="fas fa-tags" style="margin-right: 10px;"></i>
+                                    دسته‌بندی‌ها ({{ categories_results.count }} مورد)
+                                </h3>
+                                <div class="row">
+                                    {% for category in categories_results %}
+                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" style="margin-bottom: 20px;">
+                                            <div class="category-card" style="background: white; border: 1px solid #e9ecef; border-radius: 8px; padding: 20px; text-align: center; transition: all 0.3s;">
+                                                <div class="category-image" style="margin-bottom: 15px;">
+                                                    {% if category.photo %}
+                                                        <img src="{{ category.photo.url }}" alt="{{ category.category_name }}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;">
+                                                    {% else %}
+                                                        <div style="width: 80px; height: 80px; background: #f8f9fa; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                                            <i class="fas fa-folder" style="font-size: 30px; color: #6c757d;"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                <h5>
+                                                    <a href="{% url 'productions:product_list_by_category' category.slug %}" style="color: #333; text-decoration: none;">
+                                                        {{ category.category_name }}
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <!-- Products Results -->
+                    {% if results %}
+                        <div class="col-xl-12">
+                            <div class="search-section">
+                                <h3 style="color: #333; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 2px solid #000;">
+                                    <i class="fas fa-shopping-bag" style="margin-right: 10px;"></i>
+                                    محصولات ({{ results.count }} مورد)
+                                </h3>
+                                
+                                <div class="row grid__responsive">
+                                    {% for product in results %}
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6">
+                                            <div class="grid__wraper">
+                                                <div class="grid__wraper__img">
+                                                    <div class="grid__wraper__img__inner">
+                                                        <a href="{{ product.get_absolute_url }}">
+                                                            <img class="primary__image" src="{{ product.main_image.url }}" alt="Primary Image">
+                                                        </a>
+                                                    </div>
+                                                    <div class="grid__wraper__icon">
+                                                        <ul>
+                                                            <li>
+                                                                <span data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                    <a href="{{ product.get_absolute_url }}" title="مشاهده سریع">
+                                                                        <i class="far fa-eye"></i>
+                                                                    </a>
+                                                                </span>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ product.get_absolute_url }}" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به سبد خرید">
+                                                                    <i class="fas fa-shopping-cart"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="grid__wraper__badge">
+                                                        <span class="new__badge">جدید</span>
+                                                    </div>
+                                                </div>
+                                                <div class="grid__wraper__info">
+                                                    <h3 class="grid__wraper__tittle">
+                                                        <a href="{{ product.get_absolute_url }}" tabindex="0">{{ product.name }}</a>
+                                                    </h3>
+                                                    <div class="grid__wraper__price">
+                                                        <span>{{ product.price|floatformat:0 }} تومان</span>
+                                                    </div>
+                                                    <div class="grid__wraper__color">
+                                                        <ul class="color-categories grid-color-swatch color__img__parent d-flex justify-content-center">
+                                                            {% for color in product.colors.all|slice:":4" %}
+                                                                <li class="color_img_variant">
+                                                                    <label data-bs-toggle="tooltip" data-bs-placement="top" title="{{ color.name }}" style="background: {{ color.name|translate_color }};">
+                                                                    </label>
+                                                                </li>
+                                                            {% endfor %}
+                                                            {% if product.colors.all.count > 4 %}
+                                                                <li class="vaiant-plus-one">
+                                                                    <a href="{{ product.get_absolute_url }}" tabindex="0">
+                                                                        <span>+{{ product.colors.all.count|add:"-4" }}</span>
+                                                                    </a>
+                                                                </li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .search-section h3 {
+            position: relative;
+        }
+        
+        .search-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: #000;
+        }
+        
+        .no-results-message {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+{% endblock content %}

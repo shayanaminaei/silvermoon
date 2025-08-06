@@ -31,3 +31,9 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ("name", "product_id")
     list_filter = ("product_id",)
     search_fields = ("product_id",)
+
+
+
+@admin.register(Donation)
+class DonationAdmin(admin.ModelAdmin):
+    list_display = ['donor_name', 'amount', 'created_at']
